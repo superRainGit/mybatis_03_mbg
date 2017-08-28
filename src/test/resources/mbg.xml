@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!--  
+		targetRuntime:指定生成的CRUD操作的简单与复杂性
+			-Mybatis3Simple:简单版CRUD
+			-Mybatis3:豪华版CRUD
+	-->
+	<context id="DB2Tables" targetRuntime="MyBatis3Simple">
+		<!--  
+			jdbcConnection:指定如何连接到指定数据库
+		-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/mybatis?useUnicode=true@abmp;characterEncoding=UTF-8@abmp;allowMultiQueries=true" 
+			userId="root" password="root">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--  
+			javaModelGenerator:指定javaBean的生成策略
+			targetPackage:目标包名
+			targetProject:目标工程
+		-->
+		<javaModelGenerator targetPackage="cn.zhang.beans"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--  
+			sqlMapGenerator:sql映射生成策略
+		-->
+		<sqlMapGenerator targetPackage="cn.zhang.mapper"
+			targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!--  
+			javaClientGenerator:指定mapper接口所在的位置
+		-->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.zhang.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+	
+		<!--  
+			指定要逆向分析那些表:根据表要创建的javaBean
+		-->
+		<table tableName="employee" domainObjectName="Employee"></table>
+	</context>
+</generatorConfiguration>
